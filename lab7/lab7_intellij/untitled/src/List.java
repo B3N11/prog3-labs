@@ -10,16 +10,16 @@ public class List implements Command{
         if(Main.beerList.isEmpty())
             throw new Exception("Nincs még sör a listában!");
 
+        Comparator<Beer> cmp = Main.comps.get("name");
+
         if(cmd.length >= 2){
 
-            if(cmd[1].equals("name"))
-                Collections.sort(Main.beerList, (b1, b2) -> b1.getName().compareTo(b2.getName()));
-            else if(cmd[1].equals("style"))
-                Collections.sort(Main.beerList, (b1, b2) -> b1.getStyle().compareTo(b2.getStyle()));
-            else if(cmd[1].equals("strength"))
-                Collections.sort(Main.beerList, Comparator.comparing((Beer b1) -> b1.getStrength()));
-            else
+            cmp = Main.comps.get(cmd[1]);
+
+            if(cmp == null)
                 throw new Exception("Helytelen argumentum!");
+
+            Collections.sort(Main.beerList, cmp);
         }
 
         for(var beer : Main.beerList)

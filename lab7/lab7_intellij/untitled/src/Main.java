@@ -9,13 +9,14 @@ import lambeer.*;
 public class Main {
 
     public static ArrayList<Beer> beerList;
-    private static HashMap<String, Command> commands;
-    private static HashMap<String, Comparator<Beer>> comps;
+    public static HashMap<String, Command> commands;
+    public static HashMap<String, Comparator<Beer>> comps;
 
     public static void main(String[] args) throws Exception{
 
         beerList = new ArrayList<>();
         createCommands();
+        createComparators();
         var bs = new BufferedReader(new InputStreamReader(System.in));
 
         while (true){
@@ -62,5 +63,12 @@ public class Main {
         commands.put("load", load);
         commands.put("save", save);
         commands.put("search", search);
+    }
+
+    private static void createComparators(){
+        comps = new HashMap<String, Comparator<Beer>>();
+        comps.put("name", (b1, b2) -> b1.getName().compareTo(b2.getName()));
+        comps.put("style", (b1, b2) -> b1.getName().compareTo(b2.getName()));
+        comps.put("strength", Comparator.comparing(Beer::getStrength));
     }
 }
