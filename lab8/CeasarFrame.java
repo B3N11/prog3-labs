@@ -1,7 +1,5 @@
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.GridLayout;
-import java.util.ArrayList;
 import java.util.Vector;
 
 import javax.swing.JButton;
@@ -22,7 +20,7 @@ public class CeasarFrame extends JFrame{
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setTitle("SwingLab");
         setPreferredSize(new Dimension(400,110));
-        setLayout(new GridLayout(2,1));
+        setLayout(new BorderLayout());
         setUpPanels();
         setResizable(true);
         pack();
@@ -33,25 +31,24 @@ public class CeasarFrame extends JFrame{
         for(char i = 'A'; i <= 'Z'; i++)
             abc.add(i);
 
-        var topPanel = new JPanel(new BorderLayout());
+        var topPanel = new JPanel();
 
         charComboBox = new JComboBox<Object>(abc);
-        inputField = new JTextField();
-        //Set max character limit (20 karakter széles???)
+        inputField = new JTextField(20);
         confirmButton = new JButton("Code!");
 
-        topPanel.add(charComboBox, BorderLayout.WEST);
-        topPanel.add(inputField, BorderLayout.CENTER);
-        topPanel.add(confirmButton, BorderLayout.EAST);
-        add(topPanel);
+        topPanel.add(charComboBox);
+        topPanel.add(inputField);
+        topPanel.add(confirmButton);
+        add(topPanel, BorderLayout.NORTH);
 
-        var botPanel = new JPanel(new GridLayout(1,2));
+        var botPanel = new JPanel(new BorderLayout());
 
         var label = new JLabel("Output:");
-        outputField = new JTextField();
+        outputField = new JTextField(20);
         outputField.setEditable(false);
 
-        botPanel.add(label);
+        botPanel.add(label, BorderLayout.WEST);
         botPanel.add(outputField);
         add(botPanel);
     }
