@@ -1,7 +1,7 @@
 public class Main {
 
      public static void main(String[] args) {
-        var cFrame = new CeasarFrame();
+        var cFrame = new CaesarFrame();
         cFrame.setVisible(true);  
      }
 
